@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Landing Page - Start Bootstrap Theme</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="../assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+    <link href="../assets/vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet"
+        type="text/css">
+
+    <!-- Custom styles for this template -->
+    <link href="../assets/css/landing-page.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-light bg-light static-top">
+        <div class="container">
+            <a class="navbar-brand" href="/"><img src="../assets/img/logo-youngsu.png"></a>
+            <a class="btn btn-primary" href="#">Sign In</a>
+        </div>
+    </nav>
+
+    <!-- Masthead -->
+    <header class="masthead text-white text-center">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-9 mx-auto">
+                    <h1 class="mb-5">수영장 검색</h1>
+                </div>
+                <div class="mb-5 col-md-10 col-lg-8 col-xl-7 mx-auto">
+                    <!-- 폼태그 시작 -->
+                    <form action='/pools/search'>
+                        <div class="form-row mb-4">
+                            <!-- 검색할 텍스트 -->
+                            <div class="col-12 col-md-9 mb-2 mb-md-0">
+                                <input name='searchWord' type="text" class="form-control form-control-lg"
+                                    placeholder="수영장 이름 또는 위치(ex.성동구) 입력">
+                            </div>
+                            <!-- 제출 버튼 -->
+                            <div class="col-12 col-md-3">
+                                <button type="submit" class="btn btn-block btn-lg btn-primary">검색</button>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <!-- 검색 필터 버튼 -->
+                            <div id="filter_box" class="text-wrap">
+                                <button class="btn btn-secondary" type="button" data-toggle="collapse"
+                                    data-target="#collapseExample" aria-expanded="false"
+                                    aria-controls="collapseExample">
+                                    +검색 필터설정
+                                </button>
+                            </div>
+                        </div>
+                        <div class="form-row ">
+                            <div class="collapse col-12" id="collapseExample">
+                                <div class="card">
+                                    <div class="card-body mb-0">
+                                        <!-- 수영장 유형 여기는 풀타입이 012 이므로 수정이 필요할 듯.. -->
+                                        <div class="form-row">
+                                            <p class="text-dark mr-1">운영방식: </p>
+                                            <div class="form-check">
+                                                <input type="hidden" name="poolPublic" value="0"><input
+                                                    class="form-check-input" checked type="checkbox"
+                                                    onclick="valueReverser(this)">
+                                                <label class="form-check-label text-dark mr-1" for="poolPublic">공공
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input type="hidden" name="poolPrivate" value="0"><input
+                                                    class="form-check-input" checked type="checkbox"
+                                                    onclick="valueReverser(this)">
+                                                <label class="form-check-label text-dark mr-1" for="poolPrivate">사설
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input type="hidden" name="poolHotel" value="0"><input
+                                                    class="form-check-input" type="checkbox"
+                                                    onclick="valueReverser(this)">
+                                                <label class="form-check-label text-dark mr-1" for="poolHotel">호텔
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <!-- 실내외 -->
+                                        <div class="form-row">
+                                            <p class="text-dark mr-1">수영장 유형: </p>
+                                            <div class="form-check">
+                                                <input type="hidden" name="poolIndoor" value="0"><input
+                                                    class="form-check-input" checked type="checkbox"
+                                                    onclick="valueReverser(this)">
+                                                <label class="form-check-label text-dark mr-1" for="poolIndoor">실내 |
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input type="hidden" name="poolOutdoor" value="0"><input
+                                                    class="form-check-input" type="checkbox"
+                                                    onclick="valueReverser(this)">
+                                                <label class="form-check-label text-dark mr-1" for="poolOutdoor">야외
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <!-- 자유수영 -->
+                                        <div class="form-row">
+                                            <p class="text-dark mr-1">자유수영이 있는 수영장만 검색: </p>
+                                            <div class="form-check">
+                                                <input type="hidden" name="poolOpentime" value="0"><input
+                                                    class="form-check-input" type="checkbox"
+                                                    onclick="valueReverser(this)">
+                                                <label class="form-check-label text-dark mr-1"
+                                                    for="poolOpentime">확인</label>
+                                            </div>
+                                        </div>
+                                        <!-- 유아전용 여성전용 장애인전용 -->
+                                        <div class="form-row">
+                                            <p class="text-dark mr-1">전용 수영장 검색: </p>
+                                            <div class="form-check">
+                                                <input type="hidden" name="poolForChild" value="0"><input
+                                                    class="form-check-input" checked type="checkbox"
+                                                    onclick="valueReverser(this)">
+                                                <label class="form-check-label text-dark mr-1" for="poolForChild">유아전용 |
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input type="hidden" name="poolForWoman" value="0"><input
+                                                    class="form-check-input" type="checkbox"
+                                                    onclick="valueReverser(this)">
+                                                <label class="form-check-label text-dark mr-1" for="poolForWoman">여성전용 ㅣ
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input type="hidden" name="poolForDisabled" value="0"><input
+                                                    class="form-check-input" type="checkbox"
+                                                    onclick="valueReverser(this)">
+                                                <label class="form-check-label text-dark mr-1"
+                                                    for="poolForDisabled">장애인전용 ㅣ </label>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-check">
+                                                <input type="hidden" name="pageNumber" value=1 checked>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Image Showcases -->
+    <section class="showcase">
+        <div class="container-fluid p-0">
+            <div class="row no-gutters">
+
+                <div class="col-lg-6 order-lg-2 text-white showcase-img"
+                    style="background-image: url('../assets/img/bg-showcase-1.jpg');"></div>
+                <div class="col-lg-6 order-lg-1 my-auto showcase-text">
+                    <h2 class="mb-4">수영장 운영정보를 한눈에 찾을 수 있습니다!</h2>
+                    <p class="lead mb-0">수영장 운영 정보 찾으려고, 각 체육관 사이트 접속해서 수영 목록 찾고 강좌 정보 찾기 불편하셨죠?
+                        저희가 찾기 쉽게 도와드릴게요.
+                    </p>
+                </div>
+            </div>
+            <div class="row no-gutters">
+                <div class="col-lg-6 text-white showcase-img"
+                    style="background-image: url('../assets/img/bg-showcase-2.jpg');">
+                </div>
+                <div class="col-lg-6 my-auto showcase-text">
+                    <h2 class="mb-4">사이트에 가입하여 운영정보를 업데이트 해주세요!</h2>
+                    <p class="lead mb-0">저희 사이트는 유저분들의 정보 업데이트로 운영됩니다. 기본 운영 정보는 저희가 입력하지만, 운영의 변경 사항이나
+                        휴관 정보 등을 마이페이지에서 업데이트 해주세요.
+                    </p>
+                </div>
+            </div>
+            <div class="row no-gutters">
+                <div class="col-lg-6 order-lg-2 text-white showcase-img"
+                    style="background-image: url('../assets/img/bg-showcase-3.jpg');"></div>
+                <div class="col-lg-6 order-lg-1 my-auto showcase-text">
+                    <h2 class="mb-4">자유수영만 찾기, 어린이 수영만 찾기 등 다양한 필터 기능을 제공합니다!</h2>
+                    <p class="lead mb-0">각 체육관 사이트마다 생김새가 달라서 찾기 힘들었던 자유수영 운영정보 쉽게 찾는 것을 도와드릴게요.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials text-center bg-light">
+        <div class="container">
+            <h2 class="mb-5">What people are saying...</h2>
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+                        <img class="img-fluid rounded-circle mb-3" src="../assets/img/testimonials-1.jpg" alt="">
+                        <h5>타키온</h5>
+                        <p class="font-weight-light mb-0">"This is fantastic! Thanks so much guys!"</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+                        <img class="img-fluid rounded-circle mb-3" src="../assets/img/testimonials-2.jpg" alt="">
+                        <h5>박재헌</h5>
+                        <p class="font-weight-light mb-0">"Bootstrap is amazing. I've been using it to create lots of
+                            super nice
+                            landing pages."</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+                        <img class="img-fluid rounded-circle mb-3" src="../assets/img/testimonials-3.jpg" alt="">
+                        <h5>Sarah W.</h5>
+                        <p class="font-weight-light mb-0">"Thanks so much for making these free resources available to
+                            us!"</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="call-to-action text-white text-center">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-9 mx-auto">
+                    <h2 class="mb-4 " href="/pool_input.html">수영장 정보를 추가하고 싶으세요? </h2>
+                </div>
+                <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+                    <div class="col-12">
+                        <button class="btn btn-block btn-lg btn-primary">정보 추가 요청하기!</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 h-100 text-center text-lg-left my-auto">
+                    <ul class="list-inline mb-2">
+                        <li class="list-inline-item">
+                            <a href="#">About</a>
+                        </li>
+                        <li class="list-inline-item">&sdot;</li>
+                        <li class="list-inline-item">
+                            <a href="#">Contact</a>
+                        </li>
+                        <li class="list-inline-item">&sdot;</li>
+                        <li class="list-inline-item">
+                            <a href="#">Terms of Use</a>
+                        </li>
+                        <li class="list-inline-item">&sdot;</li>
+                        <li class="list-inline-item">
+                            <a href="#">Privacy Policy</a>
+                        </li>
+                    </ul>
+                    <p class="text-muted small mb-4 mb-lg-0">&copy; Your Website 2020. All Rights Reserved.</p>
+                </div>
+                <div class="col-lg-6 h-100 text-center text-lg-right my-auto">
+                    <ul class="list-inline mb-0">
+                        <li class="list-inline-item mr-3">
+                            <a href="#">
+                                <i class="fab fa-facebook fa-2x fa-fw"></i>
+                            </a>
+                        </li>
+                        <li class="list-inline-item mr-3">
+                            <a href="#">
+                                <i class="fab fa-twitter-square fa-2x fa-fw"></i>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#">
+                                <i class="fab fa-instagram fa-2x fa-fw"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="../assets/vendor/jquery/jquery.min.js"></script>
+    <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script>
+        var checkboxes = document.getElementsByClassName('form-check-input');
+        console.log(checkboxes)
+        for (var i = 0; i < checkboxes.length; ++i) {
+            console.log(checkboxes[i].previousSibling)
+            if (checkboxes[i].checked) checkboxes[i].previousSibling.value = '1';
+        }
+        function valueReverser(target) {
+            target.previousSibling.value = target.checked ? 1 : 0;
+        }
+    </script>
+    <!-- <script>
+        $(".checkBox").on('change', function () {
+            if ($(this).is(':checked')) {
+                $(this).attr('value', 'true');
+            } else {
+                $(this).attr('value', 'false');
+            }
+        });
+    </script> -->
+
+</body>
+
+</html>

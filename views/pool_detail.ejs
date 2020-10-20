@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>수영장 정보 상세보기</h1>
+    <hr>
+    이름:<%=pool.poolName%><br>
+    주소:<%=pool.poolAddress%><br>
+    전화번호:<%=pool.poolPhone%><br>
+    타입:<%=pool.poolType%><br>
+    마스크:<%=pool.poolMask%><br>
+    <hr>
+    <a href="/pools/modify?poolId=<%=pool.poolId%>">수정</a>
+    <a href="/pools/delete?poolId=<%=pool.poolId%>">삭제</a>
+    <a href="/pools/list">목록으로 돌아가기</a>
+
+</body>
+
+</html>

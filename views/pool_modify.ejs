@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>수영장 정보 변경하기</h1>
+    <hr>
+    <%
+        var str="/pools/modifyDB/";
+        str+=pool.idx;
+    %>
+    <form action=<%=str%> method="get">
+        이름: <input type="text" name="name" value=<%=pool.name%>>
+        위치: <input type="text" name="location" value=<%=pool.location%>>
+        전화번호: <input type="text" name="phone" value=<%=pool.phone%>>
+        설명: <input type="text" name="description" value=<%=pool.description%>>
+        <input type="submit" value="변경">
+    </form>
+
+</body>
+
+</html>
