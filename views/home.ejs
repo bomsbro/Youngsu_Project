@@ -21,6 +21,17 @@
 
     <!-- Custom styles for this template -->
     <link href="../assets/css/landing-page.min.css" rel="stylesheet">
+    <script>
+        window.onload = function () {
+            var checkboxes = document.getElementsByClassName('form-check-input');
+            for (var i = 0; i < checkboxes.length; ++i) {
+                if (checkboxes[i].checked) checkboxes[i].previousSibling.value = '1';
+            }
+        }
+        function valueReverser(target) {
+            target.previousSibling.value = target.checked ? 1 : 0;
+        }
+    </script>
 </head>
 
 <body>
@@ -300,15 +311,12 @@
     <script src="../assets/vendor/jquery/jquery.min.js"></script>
     <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script>
-        var checkboxes = document.getElementsByClassName('form-check-input');
-        console.log(checkboxes)
-        for (var i = 0; i < checkboxes.length; ++i) {
-            console.log(checkboxes[i].previousSibling)
-            if (checkboxes[i].checked) checkboxes[i].previousSibling.value = '1';
-        }
-        function valueReverser(target) {
-            target.previousSibling.value = target.checked ? 1 : 0;
-        }
+        // var checkboxes = document.getElementsByClassName('form-check-input');
+        // for (var i = 0; i < checkboxes.length; ++i) {
+        //     console.log(checkboxes[i].previousSibling)
+        //     if (checkboxes[i].checked) checkboxes[i].previousSibling.value = '1';
+        // }
+
     </script>
     <!-- <script>
         $(".checkBox").on('change', function () {

@@ -123,7 +123,7 @@ function maskMaker(number) {
 
 router.route('/pools/search').get((req, res) => {
     var filters = {
-        'searchWord': req.query.searchWord,
+        searchWord: req.query.searchWord,
         'poolPublic': req.query.poolPublic,
         'poolPrivate': req.query.poolPrivate,
         'poolHotel': req.query.poolHotel,
@@ -160,10 +160,10 @@ router.route('/pools/search').get((req, res) => {
     // child,woman,disabled는 =로 확인
     var poolOption = req.query.poolForChild + req.query.poolForWoman + req.query.poolForDisabled;
 
-    console.log(poolTypeMask, poolOpentime, poolOption)
+    // console.log(poolTypeMask, poolOpentime, poolOption)
 
     var sql_select_totalCount = "select count(*) as cnt from pooltable where (poolName like ? or poolAddress like ?) and (poolTypeMask&?)=poolTypeMask and (poolOpentime&?)=? and poolOption=?;"
-    var sql_select = "select * from pooltable where (poolName like ? or poolAddress like ?) and (poolTypeMask&?)=poolTypeMask and (poolOpentime&?)=? and poolOption=? limit ?,?;"
+    var sql_select = "select * from pooltable where (poolName like ? or poolAddress like ?) and (poolTypeMask&?)=poolTypeMask and (poolOpentime&?)=? and poolOption=? order by poolId limit ?,?;"
     function sqlHandler() {
         return new Promise((resolve, reject) => {
             dbpool.getConnection((err, conn) => {
@@ -204,7 +204,7 @@ router.route('/pools/search').get((req, res) => {
             'totalCount': ret[0],
             'pools': ret[1],
         }
-        console.log(result)
+        // console.log(result)
         req.app.render('pool_list', { result: result }, (err, html) => {
             if (err) {
                 console.log(err)
