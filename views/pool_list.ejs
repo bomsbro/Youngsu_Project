@@ -19,18 +19,18 @@
         type="text/css">
     <!-- Custom styles for this template -->
     <link href="../assets/css/landing-page.min.css" rel="stylesheet">
-    <!-- jQuery pluginfor pagination -->
-    <script src="http://code.jquery.com/jquery-latest.min.js "></script>
-    <script type="text/javascript" src="../assets/js/jquery.twbsPagination.js"></script>
-    <!-- CDN for fontAwesome -->
-    <script src="https://kit.fontawesome.com/a371979621.js" crossorigin="anonymous"></script>
+     <!-- jQuery pluginfor pagination -->
+     <script src="http://code.jquery.com/jquery-latest.min.js "></script>
+     <script type="text/javascript" src="../assets/js/jquery.twbsPagination.js"></script>
+     <!-- CDN for fontAwesome -->
+     <script src="https://kit.fontawesome.com/a371979621.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
     <!-- Navigation -->
     <nav class="navbar navbar-light bg-light static-top">
         <div class="container">
-            <a class="navbar-brand" href="/"><img src="../assets/img/logo-youngsu.png"></a>
+              <a class="navbar-brand" href="/"><img src="../assets/img/logo-youngsu.png"></a>
             <a class="btn btn-primary" href="#">Sign In</a>
         </div>
     </nav>
@@ -105,28 +105,47 @@
         <!-- For pagination -->
         <ul id="pagenation" class="pagination justify-content-center"></ul>
         <script>
+<<<<<<< HEAD
+            var visiblePages = 10;
+            var visibleList=10;
+
+=======
             // var visiblePages = 10;
             var visiblePages = 4;
             var countList = <%=pools.length%>;
+>>>>>>> 7fe85399b33dce818266430eb29c7e69f2479ef1
             var totalCount = <%=result.totalCount%>;
-            var totalPages = totalCount / countList;
 
-            if (totalCount % countList > 0) totalPages++;
-            if (totalPages < visiblePages) visiblePages = totalPages; $('#pagenation').twbsPagination({
-                startPage: this.startPage,
-                //need for change later totalPages: this.totalPages, visiblePages: this.visiblePages, prev: "이전" , next: "다음" ,
-                first: '«', last: '»', onPageClick: function (event, page) {
-                    alert(page);
-                    location.href = "/pools/search?searchWord=" + <%=result.filters.searchWord %> +"&poolPublic=" + <%=result.filters.poolPublic %>
-                        +" &poolPrivate=" + <%=result.filters.poolPrivate %>
-                            +" &poolHotel=" + <%=result.filters.poolHotel %>
-                                +" &poolIndoor=" + <%=result.filters.poolIndoor %>
-                                    +" &poolOutdoor=" + <%=result.filters.poolOutdoor %>
-                                        +" &poolOpentime=" + <%=result.filters.poolOpentime %>
-                                            +" &poolForChild=" + <%=result.filters.poolForChild %>
-                                                +" &poolForWoman=" + <%=result.filters.poolForWoman %>
-                                                    +" &poolForDisabled=" + <%=result.filters.poolForDisabled %>
-                                                        +" &pageNumber=" + page;
+<<<<<<< HEAD
+            var totalPages = totalCount / visibleList;
+            if (totalCount % visibleList > 0)  totalPages++;
+            if (totalPages < visiblePages) visiblePages = totalPages;
+
+            var pageNow=parseInt(<%=result.filters.pageNumber%>);
+
+            $('#pagenation').twbsPagination({
+                startPage: this.pageNow, //need for change later
+                totalPages: this.totalPages,
+                visiblePages: this.visiblePages, 
+                prev: "이전",
+                next: "다음",
+                first: '«',
+                last: '»',
+                onPageClick: function (event, page) {
+                    if(page!=parseInt(<%=result.filters.pageNumber%>)){
+                    location.href=(
+                            "/pools/search?searchWord=<%=result.filters.searchWord %>"
+                            +"&poolPublic=<%=result.filters.poolPublic %>"
+                            +"&poolPrivate=<%=result.filters.poolPrivate %>"
+                            +"&poolHotel=<%=result.filters.poolHotel %>"
+                            +"&poolIndoor=<%=result.filters.poolIndoor %>"
+                            +"&poolOutdoor=<%=result.filters.poolOutdoor %>"
+                            +"&poolOpentime=<%=result.filters.poolOpentime %>"
+                            +"&poolForChild=<%=result.filters.poolForChild %>"
+                            +"&poolForWoman=<%=result.filters.poolForWoman %>"
+                            +"&poolForDisabled=<%=result.filters.poolForDisabled %>"
+                            +"&pageNumber="+String(page));
+                    }
                 }
             });
         </script>
