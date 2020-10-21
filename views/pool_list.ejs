@@ -19,29 +19,33 @@
         type="text/css">
     <!-- Custom styles for this template -->
     <link href="../assets/css/landing-page.min.css" rel="stylesheet">
-     <!-- jQuery pluginfor pagination -->
-     <script src="http://code.jquery.com/jquery-latest.min.js "></script>
-     <script type="text/javascript" src="../assets/js/jquery.twbsPagination.js"></script>
-     <!-- CDN for fontAwesome -->
-     <script src="https://kit.fontawesome.com/a371979621.js" crossorigin="anonymous"></script>
+    <!-- jQuery pluginfor pagination -->
+    <script src="http://code.jquery.com/jquery-latest.min.js "></script>
+    <script type="text/javascript" src="../assets/js/jquery.twbsPagination.js"></script>
+    <!-- CDN for fontAwesome -->
+    <script src="https://kit.fontawesome.com/a371979621.js" crossorigin="anonymous"></script>
+    <script>
+        window.onload = function () {
+            var checkboxes = document.getElementsByClassName('form-check-input');
+            for (var i = 0; i < checkboxes.length; ++i) {
+                if (checkboxes[i].checked) checkboxes[i].previousSibling.value = '1';
+            }
+        }
+        function valueReverser(target) {
+            target.previousSibling.value = target.checked ? 1 : 0;
+        }
+    </script>
 </head>
 
 <body>
     <!-- Navigation -->
     <nav class="navbar navbar-light bg-light static-top">
         <div class="container">
-              <a class="navbar-brand" href="/"><img src="../assets/img/logo-youngsu.png"></a>
+            <a class="navbar-brand" href="/"><img src="../assets/img/logo-youngsu.png"></a>
             <a class="btn btn-primary" href="#">Sign In</a>
         </div>
     </nav>
-    <!-- Search console -->
-    <div class="container">
-        <form action="/pools/search" method="get">
-            검색: <input name='searchWord' type='text'>
-            <!-- 필터 <select -->
-            <input type='submit' value='검색'>
-        </form>
-    </div>
+
     <!--List presenting-->
     <div class="container">
         <!-- Page Heading -->
@@ -50,23 +54,154 @@
         </h1>
         <%function dec2bin(dec){return (dec >>> 0).toString(2);} %>
         <hr>
-        <!--Contentent -->
-        <%
-        var pools=result.pools;
-        for(var poolInfo of pools){
-        %>
+         <!--Contentent & Pagination-->
         <div class="row">
-            <div class="col-md-7">
-                <a href="#">
-                    <img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/700x300" alt="">
-                </a>
+            <!-- Search Widget Column -->
+            <div class="col-lg-3">
+                <!-- Search Widget -->
+                <div class="card my-4">
+                    <h5 class="card-header">Search</h5>
+                    <div class="card-body">
+                        <!-- 폼시작 -->
+                        <form action='/pools/search'>
+                            <div class="form-row mb-4">
+                                <!-- 검색할 텍스트 -->
+                                <div class="input-group">
+                                    <input name="searchWord" type="text" class="form-control" placeholder="Search for...">
+                                    <span class="input-group-append">
+                                      <button class="btn btn-secondary" type="submit">Go!</button>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <!-- 검색 필터 버튼 -->
+                                <div id="filter_box" class="text-wrap">
+                                    <button class="btn btn-secondary" type="button" data-toggle="collapse"
+                                        data-target="#collapseExample" aria-expanded="false"
+                                        aria-controls="collapseExample">
+                                        +검색 필터설정
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="form-row ">
+                                <div class="collapse col-12" id="collapseExample">
+                                    <div class="card">
+                                        <div class="card-body mb-0">
+                                            <!-- 수영장 유형 여기는 풀타입이 012 이므로 수정이 필요할 듯.. -->
+                                            <div class="form-row">
+                                                <p class="text-dark mr-1">운영방식: </p>
+                                                <div class="form-check">
+                                                    <input type="hidden" name="poolPublic" value="0"><input
+                                                        class="form-check-input" checked type="checkbox"
+                                                        onclick="valueReverser(this)">
+                                                    <label class="form-check-label text-dark mr-1" for="poolPublic">공공
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input type="hidden" name="poolPrivate" value="0"><input
+                                                        class="form-check-input" checked type="checkbox"
+                                                        onclick="valueReverser(this)">
+                                                    <label class="form-check-label text-dark mr-1" for="poolPrivate">사설
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input type="hidden" name="poolHotel" value="0"><input
+                                                        class="form-check-input" type="checkbox"
+                                                        onclick="valueReverser(this)">
+                                                    <label class="form-check-label text-dark mr-1" for="poolHotel">호텔
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <!-- 실내외 -->
+                                            <div class="form-row">
+                                                <p class="text-dark mr-1">수영장 유형: </p>
+                                                <div class="form-check">
+                                                    <input type="hidden" name="poolIndoor" value="0"><input
+                                                        class="form-check-input" checked type="checkbox"
+                                                        onclick="valueReverser(this)">
+                                                    <label class="form-check-label text-dark mr-1" for="poolIndoor">실내 |
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input type="hidden" name="poolOutdoor" value="0"><input
+                                                        class="form-check-input" type="checkbox"
+                                                        onclick="valueReverser(this)">
+                                                    <label class="form-check-label text-dark mr-1" for="poolOutdoor">야외
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <!-- 자유수영 -->
+                                            <div class="form-row">
+                                                <p class="text-dark mr-1">자유수영이 있는 수영장만 검색: </p>
+                                                <div class="form-check">
+                                                    <input type="hidden" name="poolOpentime" value="0"><input
+                                                        class="form-check-input" type="checkbox"
+                                                        onclick="valueReverser(this)">
+                                                    <label class="form-check-label text-dark mr-1"
+                                                        for="poolOpentime">확인</label>
+                                                </div>
+                                            </div>
+                                            <!-- 유아전용 여성전용 장애인전용 -->
+                                            <div class="form-row">
+                                                <p class="text-dark mr-1">전용 수영장 검색: </p>
+                                                <div class="form-check">
+                                                    <input type="hidden" name="poolForChild" value="0"><input
+                                                        class="form-check-input" checked type="checkbox"
+                                                        onclick="valueReverser(this)">
+                                                    <label class="form-check-label text-dark mr-1"
+                                                        for="poolForChild">유아전용 |
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input type="hidden" name="poolForWoman" value="0"><input
+                                                        class="form-check-input" type="checkbox"
+                                                        onclick="valueReverser(this)">
+                                                    <label class="form-check-label text-dark mr-1"
+                                                        for="poolForWoman">여성전용 ㅣ
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input type="hidden" name="poolForDisabled" value="0"><input
+                                                        class="form-check-input" type="checkbox"
+                                                        onclick="valueReverser(this)">
+                                                    <label class="form-check-label text-dark mr-1"
+                                                        for="poolForDisabled">장애인전용 ㅣ </label>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-check">
+                                                    <input type="hidden" name="pageNumber" value=1 checked>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-            <div class="col-md-5">
-                <div class="row mb-1">
-                    <!-- For checking poolOptions -->
-                    <h3><%=poolInfo.poolName%>
-                        <%var Options=poolInfo.poolOption.toString();%>
-                        <%if(Options[0]==1){%><i class="fas fa-child text-warning"></i><%}%>
+
+            <!--Contentent & Pagination-->
+            <div class="col-lg-9">
+                <!--Contentent -->
+                <%
+                var pools=result.pools;
+                for(var poolInfo of pools){
+                %>
+                <div class="row">
+
+                    <div class="col-md-7">
+                        <a href="#">
+                            <img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/700x300" alt="">
+                        </a>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="row mb-1">
+                            <!-- For checking poolOptions -->
+                            <h3><%=poolInfo.poolName%>
+                                <%var Options=poolInfo.poolOption.toString();%>
+                                <%if(Options[0]==1){%><i class="fas fa-child text-warning"></i><%}%>
                    <%if(Options[1]==1){%><i class="fas fa-female text-danger"></i><%}%>
                    <%if(Options[2]==1){%><i class="fab fa-accessible-icon text-success"></i><%}%>
                     </h3>
@@ -77,71 +212,60 @@
                 var poolTypeText=["공공수영장/","사설수영장/","호텔수영장/","실내 ","야외 "];
                 for(var i=0; i<5; i++){
                     if(poolType[i]==1) {%>
-                        <%=poolTypeText[i]%>
-                        <%}
+                                <%=poolTypeText[i]%>
+                                <%}
                 }
                 %>
-                </div>
-                <!-- For checking poolOpentime -->
-                <%if(poolInfo.poolOpentime==1){%>
-                <div class="row mb-3">
-                    <i class="fas fa-swimming-pool fa-2x text-info"></i>
-                </div>
-                <%}else{%>
-                <div class="row mb-3">
-                    <i class="fas fa-swimming-pool fa-2x text-secondary"></i>
-                </div>
-                <%}%>
+                        </div>
+                        <!-- For checking poolOpentime -->
+                        <%if(poolInfo.poolOpentime==1){%>
+                        <div class="row mb-3">
+                            <i class="fas fa-swimming-pool fa-2x text-info"></i>
+                        </div>
+                        <%}else{%>
+                        <div class="row mb-3">
+                            <i class="fas fa-swimming-pool fa-2x text-secondary"></i>
+                        </div>
+                        <%}%>
                 <!--Other info-->
                 <div class="row mb-2"><%=poolInfo.poolAddress%>
+                    </div>
+                    <div class="row mb-3"><%=poolInfo.poolPhone%></div>
+                    <a class="btn btn-primary" href="/pools/detail?poolId=<%=poolInfo.poolId%>">수영장 상세보기</a>
+                </div>
+                </div>
+                <hr>
+                <%}%>
+
+                <!-- For pagination -->
+                <ul id="pagenation" class="pagination justify-content-center"></ul>
+                <script>
+                    var visiblePages = 10;
+                    var visibleList = 10;
+
+                    var totalCount = parseInt("<%=result.totalCount%>");
+
+                    var totalPages = totalCount / visibleList;
+                    if (totalCount % visibleList > 0) totalPages++;
+                    if (totalPages < visiblePages) visiblePages = totalPages; var
+                        pageNow = parseInt("<%=result.filters.pageNumber%>"); $('#pagenation').twbsPagination({
+                            startPage:
+                                this.pageNow, //need for change later totalPages: this.totalPages, visiblePages: this.visiblePages,
+                            prev: "이전", next: "다음", first: '«', last: '»', onPageClick: function (event, page) {
+                                if (page
+                                    != parseInt("<%=result.filters.pageNumber%>")) {
+                                    location.href = ("/pools/search?searchWord=<%=result.filters.searchWord %>"
+                                        + "&poolPublic=<%=result.filters.poolPublic %>" + "&poolPrivate=<%=result.filters.poolPrivate %>"
+                                        + "&poolHotel=<%=result.filters.poolHotel %>" + "&poolIndoor=<%=result.filters.poolIndoor %>"
+                                        + "&poolOutdoor=<%=result.filters.poolOutdoor %>" + "&poolOpentime=<%=result.filters.poolOpentime %>"
+                                        + "&poolForChild=<%=result.filters.poolForChild %>" + "&poolForWoman=<%=result.filters.poolForWoman %>"
+                                        + "&poolForDisabled=<%=result.filters.poolForDisabled %>" + "&pageNumber=" + String(page));
+                                }
+                            }
+                        });
+                </script>
             </div>
-            <div class="row mb-3"><%=poolInfo.poolPhone%></div>
-            <a class="btn btn-primary" href="/pools/detail?poolId=<%=poolInfo.poolId%>">수영장 상세보기</a>
-        </div>
-    </div>
-    <hr>
-    <%}%>
-
-        <!-- For pagination -->
-        <ul id="pagenation" class="pagination justify-content-center"></ul>
-        <script>
-            var visiblePages = 10;
-            var visibleList=10;
-
-            var totalCount = parseInt("<%=result.totalCount%>");
-
-            var totalPages = totalCount / visibleList;
-            if (totalCount % visibleList > 0)  totalPages++;
-            if (totalPages < visiblePages) visiblePages = totalPages;
-
-            var pageNow=parseInt("<%=result.filters.pageNumber%>");
-
-            $('#pagenation').twbsPagination({
-                startPage: this.pageNow, //need for change later
-                totalPages: this.totalPages,
-                visiblePages: this.visiblePages, 
-                prev: "이전",
-                next: "다음",
-                first: '«',
-                last: '»',
-                onPageClick: function (event, page) {
-                    if(page!=parseInt("<%=result.filters.pageNumber%>")){
-                    location.href=(
-                            "/pools/search?searchWord=<%=result.filters.searchWord %>"
-                            +"&poolPublic=<%=result.filters.poolPublic %>"
-                            +"&poolPrivate=<%=result.filters.poolPrivate %>"
-                            +"&poolHotel=<%=result.filters.poolHotel %>"
-                            +"&poolIndoor=<%=result.filters.poolIndoor %>"
-                            +"&poolOutdoor=<%=result.filters.poolOutdoor %>"
-                            +"&poolOpentime=<%=result.filters.poolOpentime %>"
-                            +"&poolForChild=<%=result.filters.poolForChild %>"
-                            +"&poolForWoman=<%=result.filters.poolForWoman %>"
-                            +"&poolForDisabled=<%=result.filters.poolForDisabled %>"
-                            +"&pageNumber="+String(page));
-                    }
-                }
-            });
-        </script>
+         </div>
     </div>
 
     <!-- 검색결과 검색창 필터창 정렬창 -->
@@ -159,63 +283,65 @@
                 </div>
                 <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
                     <div class="col-12">
-                        <button class="btn btn-block btn-lg btn-primary" href='/pool_input.html'>정보 추가 요청하기!</button>
+                        <button class="btn btn-block btn-lg btn-primary" href='/pool_input.html'>정보 추가
+                            요청하기!</button>
                     </div>
                 </div>
             </div>
         </div>
-        </section>
+    </section>
 
-        <!-- Footer -->
-        <footer class="footer bg-light">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6 h-100 text-center text-lg-left my-auto">
-                        <ul class="list-inline mb-2">
-                            <li class="list-inline-item">
-                                <a href="#">About</a>
-                            </li>
-                            <li class="list-inline-item">&sdot;</li>
-                            <li class="list-inline-item">
-                                <a href="#">Contact</a>
-                            </li>
-                            <li class="list-inline-item">&sdot;</li>
-                            <li class="list-inline-item">
-                                <a href="#">Terms of Use</a>
-                            </li>
-                            <li class="list-inline-item">&sdot;</li>
-                            <li class="list-inline-item">
-                                <a href="#">Privacy Policy</a>
-                            </li>
-                        </ul>
-                        <p class="text-muted small mb-4 mb-lg-0">&copy; Your Website 2020. All Rights Reserved.</p>
-                    </div>
-                    <div class="col-lg-6 h-100 text-center text-lg-right my-auto">
-                        <ul class="list-inline mb-0">
-                            <li class="list-inline-item mr-3">
-                                <a href="#">
-                                    <i class="fab fa-facebook fa-2x fa-fw"></i>
-                                </a>
-                            </li>
-                            <li class="list-inline-item mr-3">
-                                <a href="#">
-                                    <i class="fab fa-twitter-square fa-2x fa-fw"></i>
-                                </a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href="#">
-                                    <i class="fab fa-instagram fa-2x fa-fw"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+    <!-- Footer -->
+    <footer class="footer bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 h-100 text-center text-lg-left my-auto">
+                    <ul class="list-inline mb-2">
+                        <li class="list-inline-item">
+                            <a href="#">About</a>
+                        </li>
+                        <li class="list-inline-item">&sdot;</li>
+                        <li class="list-inline-item">
+                            <a href="#">Contact</a>
+                        </li>
+                        <li class="list-inline-item">&sdot;</li>
+                        <li class="list-inline-item">
+                            <a href="#">Terms of Use</a>
+                        </li>
+                        <li class="list-inline-item">&sdot;</li>
+                        <li class="list-inline-item">
+                            <a href="#">Privacy Policy</a>
+                        </li>
+                    </ul>
+                    <p class="text-muted small mb-4 mb-lg-0">&copy; Your Website 2020. All Rights Reserved.
+                    </p>
+                </div>
+                <div class="col-lg-6 h-100 text-center text-lg-right my-auto">
+                    <ul class="list-inline mb-0">
+                        <li class="list-inline-item mr-3">
+                            <a href="#">
+                                <i class="fab fa-facebook fa-2x fa-fw"></i>
+                            </a>
+                        </li>
+                        <li class="list-inline-item mr-3">
+                            <a href="#">
+                                <i class="fab fa-twitter-square fa-2x fa-fw"></i>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#">
+                                <i class="fab fa-instagram fa-2x fa-fw"></i>
+                            </a>
+                        </li>
+                    </ul>
                 </div>
             </div>
-        </footer>
+        </div>
+    </footer>
 
-        <!-- Bootstrap core JavaScript -->
-        <script src="../assets/vendor/jquery/jquery.min.js"></script>
-        <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script src="../assets/vendor/jquery/jquery.min.js"></script>
+    <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 </body>
 
