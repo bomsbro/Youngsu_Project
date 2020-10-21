@@ -105,18 +105,11 @@
         <!-- For pagination -->
         <ul id="pagenation" class="pagination justify-content-center"></ul>
         <script>
-<<<<<<< HEAD
             var visiblePages = 10;
             var visibleList=10;
 
-=======
-            // var visiblePages = 10;
-            var visiblePages = 4;
-            var countList = <%=pools.length%>;
->>>>>>> 7fe85399b33dce818266430eb29c7e69f2479ef1
             var totalCount = <%=result.totalCount%>;
 
-<<<<<<< HEAD
             var totalPages = totalCount / visibleList;
             if (totalCount % visibleList > 0)  totalPages++;
             if (totalPages < visiblePages) visiblePages = totalPages;
