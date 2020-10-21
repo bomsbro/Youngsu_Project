@@ -10,7 +10,7 @@ const mysql = require('mysql');
 
 // please enter your mysql local username and its password below
 var yourLocalMySQLUsername = 'root2';
-var yourLocalMysSQLPassword = '1234';
+var yourLocalMySQLPassword = '1234';
 
 var sql_createUser = "create user if not exists poolmanager identified by '1234';";
 var sql_grantPrivileges = "grant all privileges on pooldb.* to 'poolmanager'@'%';";
@@ -27,6 +27,24 @@ var sql_insertValues3 = "insert into pooltable(poolId,poolName,poolAddress,poolP
 var sql_insertValues4 = "insert into pooltable(poolId,poolName,poolAddress,poolPhone,poolTypeMask,poolOpentime,poolOption) select * from (select 4 as poolId,'앗차거 호텔' as poolName,'부산 부전동' as poolAddress,'010-4444-4444' as poolPhone,7 as poolTypeMask,0 as poolOpentime,1 as poolOption) as tmp where not exists(select poolName from pooltable where poolName = '앗차거 호텔') limit 1;";
 var sqls2 = sql_createTable + sql_insertValues1 + sql_insertValues2 + sql_insertValues3 + sql_insertValues4;
 
+var randomWords = "가나다라마바사아자차카타파하";
+var randomOptions = [0, 100, 10, 1, 101, 110, 111, 11]
+
+var randomSz = 500;
+for (var i = 5; i < randomSz; ++i) {
+    var poolNameRandom = "";
+    for (var charCnt = 0; charCnt < 3; ++charCnt)poolNameRandom += randomWords[parseInt(Math.random() * 14)];
+    var poolPhoneRandom = "010-" + poolNameRandom + "-0000";
+    poolNameRandom = "'" + poolNameRandom + "'";
+    poolPhoneRandom = "'" + poolPhoneRandom + "'";
+    var poolMaskRandom = parseInt(Math.random() * 30) + 1
+    var openTimeRandom = parseInt(Math.random())
+    var optionRandom = randomOptions[parseInt(Math.random() * 8)]
+    var sql_insertValuesRandom = "insert into pooltable(poolId,poolName,poolAddress,poolPhone,poolTypeMask,poolOpentime,poolOption) select * from (select " + i + " as poolId," + poolNameRandom + " as poolName," + poolNameRandom + " as poolAddress," + poolPhoneRandom + " as poolPhone," + poolMaskRandom + " as poolTypeMask," + openTimeRandom + " as poolOpentime," + optionRandom + " as poolOption) as tmp where not exists(select poolId from pooltable where poolId = " + i + ") limit 1;";
+    // console.log(sql_insertValuesRandom)
+    sqls2 += sql_insertValuesRandom;
+}
+
 
 function db_initSetting() {
     return new Promise((resolve, reject) => {
@@ -34,7 +52,7 @@ function db_initSetting() {
             host: 'localhost',
             port: 3306,
             user: yourLocalMySQLUsername,
-            password: yourLocalMysSQLPassword,
+            password: yourLocalMySQLPassword,
             multipleStatements: true,
         })
         conn_init1.connect();
@@ -122,18 +140,19 @@ function maskMaker(number) {
 }
 
 router.route('/pools/search').get((req, res) => {
-    var filters = {
-        searchWord: req.query.searchWord,
-        'poolPublic': req.query.poolPublic,
-        'poolPrivate': req.query.poolPrivate,
-        'poolHotel': req.query.poolHotel,
-        'poolIndoor': req.query.poolIndoor,
-        'poolOutdoor': req.query.poolOutdoor,
-        'poolOpentime': req.query.poolOpentime,
-        'poolForChild': req.query.poolForChild,
-        'poolForWoman': req.query.poolForWoman,
-        'poolForDisabled': req.query.poolForDisabled,
-    }
+    // var filters = {
+    //     searchWord: req.query.searchWord,
+    //     'poolPublic': req.query.poolPublic,
+    //     'poolPrivate': req.query.poolPrivate,
+    //     'poolHotel': req.query.poolHotel,
+    //     'poolIndoor': req.query.poolIndoor,
+    //     'poolOutdoor': req.query.poolOutdoor,
+    //     'poolOpentime': req.query.poolOpentime,
+    //     'poolForChild': req.query.poolForChild,
+    //     'poolForWoman': req.query.poolForWoman,
+    //     'poolForDisabled': req.query.poolForDisabled,
+    // }
+    var filters = req.query;
     // console.log(filters);
 
     var checked = '1';
@@ -151,7 +170,7 @@ router.route('/pools/search').get((req, res) => {
     ];
     var poolTypeMask = 0;
     for (var i in poolTypeArray) {
-        if (poolTypeArray[i] == '1') poolTypeMask |= (1 << i);
+        if (poolTypeArray[i] == checked) poolTypeMask |= (1 << i);
     }
 
     // opentime은 AND연산 후에 search opentime과 같으면 true
@@ -233,15 +252,16 @@ router.route('/pools/input').get((req, res) => {
     })
 })
 
-router.route('/pools/list').get((req, res) => {
-    req.app.render('pool_list', { pools: pools }, (err, html) => {
-        if (err) {
-            res.end('<h1>ejs error!</h1>');
-            return;
-        }
-        res.end(html);
-    })
-})
+// router.route('/pools/list').get((req, res) => {
+//     req.app.render('pool_list', { pools: pools }, (err, html) => {
+//         if (err) {
+//             res.end('<h1>ejs error!</h1>');
+//             return;
+//         }
+//         res.end(html);
+//     })
+// })
+
 router.route('/pools/detail').get((req, res) => {
     var poolId = req.query.poolId;
     var pool = null;
