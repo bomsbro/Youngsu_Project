@@ -38,7 +38,7 @@ for (var i = 5; i < randomSz; ++i) {
     poolNameRandom = "'" + poolNameRandom + "'";
     poolPhoneRandom = "'" + poolPhoneRandom + "'";
     var poolMaskRandom = parseInt(Math.random() * 30) + 1
-    var openTimeRandom = parseInt(Math.random())
+    var openTimeRandom = parseInt(Math.random() * 2)
     var optionRandom = randomOptions[parseInt(Math.random() * 8)]
     var sql_insertValuesRandom = "insert into pooltable(poolId,poolName,poolAddress,poolPhone,poolTypeMask,poolOpentime,poolOption) select * from (select " + i + " as poolId," + poolNameRandom + " as poolName," + poolNameRandom + " as poolAddress," + poolPhoneRandom + " as poolPhone," + poolMaskRandom + " as poolTypeMask," + openTimeRandom + " as poolOpentime," + optionRandom + " as poolOption) as tmp where not exists(select poolId from pooltable where poolId = " + i + ") limit 1;";
     // console.log(sql_insertValuesRandom)
@@ -156,7 +156,7 @@ router.route('/pools/search').get((req, res) => {
     // console.log(filters);
 
     var checked = '1';
-    var itemsPerPage = 10;
+    var itemsPerPage = 4;
     var pageNumber = req.query.pageNumber;
     var searchWord = '%' + req.query.searchWord + '%';
 

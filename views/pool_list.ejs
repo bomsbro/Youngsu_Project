@@ -19,18 +19,18 @@
         type="text/css">
     <!-- Custom styles for this template -->
     <link href="../assets/css/landing-page.min.css" rel="stylesheet">
-     <!-- jQuery pluginfor pagination -->
-     <script src="http://code.jquery.com/jquery-latest.min.js "></script>
-     <script type="text/javascript" src="../assets/js/jquery.twbsPagination.js"></script>
-     <!-- CDN for fontAwesome -->
-     <script src="https://kit.fontawesome.com/a371979621.js" crossorigin="anonymous"></script>
+    <!-- jQuery pluginfor pagination -->
+    <script src="http://code.jquery.com/jquery-latest.min.js "></script>
+    <script type="text/javascript" src="../assets/js/jquery.twbsPagination.js"></script>
+    <!-- CDN for fontAwesome -->
+    <script src="https://kit.fontawesome.com/a371979621.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
     <!-- Navigation -->
     <nav class="navbar navbar-light bg-light static-top">
         <div class="container">
-              <a class="navbar-brand" href="/"><img src="../assets/img/logo-youngsu.png"></a>
+            <a class="navbar-brand" href="/"><img src="../assets/img/logo-youngsu.png"></a>
             <a class="btn btn-primary" href="#">Sign In</a>
         </div>
     </nav>
@@ -65,8 +65,8 @@
                 <div class="row mb-1">
                     <!-- For checking poolOptions -->
                     <h3><%=poolInfo.poolName%>
-                    <%var Options=poolInfo.poolOption.toString();%>
-                   <%if(Options[0]==1){%><i class="fas fa-child text-warning"></i><%}%>
+                        <%var Options=poolInfo.poolOption.toString();%>
+                        <%if(Options[0]==1){%><i class="fas fa-child text-warning"></i><%}%>
                    <%if(Options[1]==1){%><i class="fas fa-female text-danger"></i><%}%>
                    <%if(Options[2]==1){%><i class="fab fa-accessible-icon text-success"></i><%}%>
                     </h3>
@@ -77,63 +77,56 @@
                 var poolTypeText=["공공수영장/","사설수영장/","호텔수영장/","실내 ","야외 "];
                 for(var i=0; i<5; i++){
                     if(poolType[i]==1) {%>
-                    <%=poolTypeText[i]%>
-                    <%}
+                        <%=poolTypeText[i]%>
+                        <%}
                 }
                 %>
                 </div>
                 <!-- For checking poolOpentime -->
                 <%if(poolInfo.poolOpentime==1){%>
                 <div class="row mb-3">
-                <i class="fas fa-swimming-pool fa-2x text-info"></i>
+                    <i class="fas fa-swimming-pool fa-2x text-info"></i>
                 </div>
                 <%}else{%>
                 <div class="row mb-3">
-                <i class="fas fa-swimming-pool fa-2x text-secondary"></i>
+                    <i class="fas fa-swimming-pool fa-2x text-secondary"></i>
                 </div>
                 <%}%>
                 <!--Other info-->
-                <div class="row mb-2"><%=poolInfo.poolAddress%></div>
-                <div class="row mb-3"><%=poolInfo.poolPhone%></div>
-                <a class="btn btn-primary" href="/pools/detail?poolId=<%=poolInfo.poolId%>">수영장 상세보기</a>
+                <div class="row mb-2"><%=poolInfo.poolAddress%>
             </div>
+            <div class="row mb-3"><%=poolInfo.poolPhone%></div>
+            <a class="btn btn-primary" href="/pools/detail?poolId=<%=poolInfo.poolId%>">수영장 상세보기</a>
         </div>
-        <hr>
-        <%}%>
+    </div>
+    <hr>
+    <%}%>
 
         <!-- For pagination -->
         <ul id="pagenation" class="pagination justify-content-center"></ul>
         <script>
-            var visiblePages = 10;
+            // var visiblePages = 10;
+            var visiblePages = 4;
             var countList = <%=pools.length%>;
             var totalCount = <%=result.totalCount%>;
             var totalPages = totalCount / countList;
 
-            if (totalCount % countList > 0)  totalPages++;
-            if (totalPages < visiblePages) visiblePages = totalPages;
-
-            $('#pagenation').twbsPagination({
-                startPage: this.startPage, //need for change later
-                totalPages: this.totalPages,
-                visiblePages: this.visiblePages, 
-                prev: "이전",
-                next: "다음",
-                first: '«',
-                last: '»',
-                onPageClick: function (event, page) {
+            if (totalCount % countList > 0) totalPages++;
+            if (totalPages < visiblePages) visiblePages = totalPages; $('#pagenation').twbsPagination({
+                startPage: this.startPage,
+                //need for change later totalPages: this.totalPages, visiblePages: this.visiblePages, prev: "이전" , next: "다음" ,
+                first: '«', last: '»', onPageClick: function (event, page) {
                     alert(page);
-                        location.href=
-                        "/pools/search?searchWord="+ <%=result.filters.searchWord%>
-                        +"&poolPublic="+ <%=result.filters.poolPublic%>
-                        +"&poolPrivate="+ <%=result.filters.poolPrivate%>
-                        +"&poolHotel="+ <%=result.filters.poolHotel%>
-                        +"&poolIndoor="+ <%=result.filters.poolIndoor%>
-                        +"&poolOutdoor="+ <%=result.filters.poolOutdoor%>
-                        +"&poolOpentime="+ <%=result.filters.poolOpentime%>
-                        +"&poolForChild="+ <%=result.filters.poolForChild%>
-                        +"&poolForWoman="+ <%=result.filters.poolForWoman%>
-                        +"&poolForDisabled="+ <%=result.filters.poolForDisabled%>
-                        +"&pageNumber="+ page;
+                    location.href = "/pools/search?searchWord=" + <%=result.filters.searchWord %> +"&poolPublic=" + <%=result.filters.poolPublic %>
+                        +" &poolPrivate=" + <%=result.filters.poolPrivate %>
+                            +" &poolHotel=" + <%=result.filters.poolHotel %>
+                                +" &poolIndoor=" + <%=result.filters.poolIndoor %>
+                                    +" &poolOutdoor=" + <%=result.filters.poolOutdoor %>
+                                        +" &poolOpentime=" + <%=result.filters.poolOpentime %>
+                                            +" &poolForChild=" + <%=result.filters.poolForChild %>
+                                                +" &poolForWoman=" + <%=result.filters.poolForWoman %>
+                                                    +" &poolForDisabled=" + <%=result.filters.poolForDisabled %>
+                                                        +" &pageNumber=" + page;
                 }
             });
         </script>
@@ -145,7 +138,7 @@
     <!-- 모바일 버전에서는 검색창안에 정렬, 필터, 지도가 따로 들어감 -->
 
     <!-- For link to add pool  -->
-    <section class="call-to-action text-white text-center">
+    <section class=" call-to-action text-white text-center">
         <div class="overlay"></div>
         <div class="container">
             <div class="row">
@@ -159,59 +152,59 @@
                 </div>
             </div>
         </div>
-    </section>
+        </section>
 
-    <!-- Footer -->
-    <footer class="footer bg-light">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 h-100 text-center text-lg-left my-auto">
-                    <ul class="list-inline mb-2">
-                        <li class="list-inline-item">
-                            <a href="#">About</a>
-                        </li>
-                        <li class="list-inline-item">&sdot;</li>
-                        <li class="list-inline-item">
-                            <a href="#">Contact</a>
-                        </li>
-                        <li class="list-inline-item">&sdot;</li>
-                        <li class="list-inline-item">
-                            <a href="#">Terms of Use</a>
-                        </li>
-                        <li class="list-inline-item">&sdot;</li>
-                        <li class="list-inline-item">
-                            <a href="#">Privacy Policy</a>
-                        </li>
-                    </ul>
-                    <p class="text-muted small mb-4 mb-lg-0">&copy; Your Website 2020. All Rights Reserved.</p>
-                </div>
-                <div class="col-lg-6 h-100 text-center text-lg-right my-auto">
-                    <ul class="list-inline mb-0">
-                        <li class="list-inline-item mr-3">
-                            <a href="#">
-                                <i class="fab fa-facebook fa-2x fa-fw"></i>
-                            </a>
-                        </li>
-                        <li class="list-inline-item mr-3">
-                            <a href="#">
-                                <i class="fab fa-twitter-square fa-2x fa-fw"></i>
-                            </a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a href="#">
-                                <i class="fab fa-instagram fa-2x fa-fw"></i>
-                            </a>
-                        </li>
-                    </ul>
+        <!-- Footer -->
+        <footer class="footer bg-light">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 h-100 text-center text-lg-left my-auto">
+                        <ul class="list-inline mb-2">
+                            <li class="list-inline-item">
+                                <a href="#">About</a>
+                            </li>
+                            <li class="list-inline-item">&sdot;</li>
+                            <li class="list-inline-item">
+                                <a href="#">Contact</a>
+                            </li>
+                            <li class="list-inline-item">&sdot;</li>
+                            <li class="list-inline-item">
+                                <a href="#">Terms of Use</a>
+                            </li>
+                            <li class="list-inline-item">&sdot;</li>
+                            <li class="list-inline-item">
+                                <a href="#">Privacy Policy</a>
+                            </li>
+                        </ul>
+                        <p class="text-muted small mb-4 mb-lg-0">&copy; Your Website 2020. All Rights Reserved.</p>
+                    </div>
+                    <div class="col-lg-6 h-100 text-center text-lg-right my-auto">
+                        <ul class="list-inline mb-0">
+                            <li class="list-inline-item mr-3">
+                                <a href="#">
+                                    <i class="fab fa-facebook fa-2x fa-fw"></i>
+                                </a>
+                            </li>
+                            <li class="list-inline-item mr-3">
+                                <a href="#">
+                                    <i class="fab fa-twitter-square fa-2x fa-fw"></i>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#">
+                                    <i class="fab fa-instagram fa-2x fa-fw"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
-    </footer>
+        </footer>
 
-    <!-- Bootstrap core JavaScript -->
-    <script src="../assets/vendor/jquery/jquery.min.js"></script>
-    <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    
+        <!-- Bootstrap core JavaScript -->
+        <script src="../assets/vendor/jquery/jquery.min.js"></script>
+        <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
 </body>
 
 
