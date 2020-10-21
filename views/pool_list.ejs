@@ -108,13 +108,13 @@
             var visiblePages = 10;
             var visibleList=10;
 
-            var totalCount = <%=result.totalCount%>;
+            var totalCount = parseInt("<%=result.totalCount%>");
 
             var totalPages = totalCount / visibleList;
             if (totalCount % visibleList > 0)  totalPages++;
             if (totalPages < visiblePages) visiblePages = totalPages;
 
-            var pageNow=parseInt(<%=result.filters.pageNumber%>);
+            var pageNow=parseInt("<%=result.filters.pageNumber%>");
 
             $('#pagenation').twbsPagination({
                 startPage: this.pageNow, //need for change later
@@ -125,7 +125,7 @@
                 first: '«',
                 last: '»',
                 onPageClick: function (event, page) {
-                    if(page!=parseInt(<%=result.filters.pageNumber%>)){
+                    if(page!=parseInt("<%=result.filters.pageNumber%>")){
                     location.href=(
                             "/pools/search?searchWord=<%=result.filters.searchWord %>"
                             +"&poolPublic=<%=result.filters.poolPublic %>"
