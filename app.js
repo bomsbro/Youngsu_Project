@@ -30,7 +30,7 @@ var sqls2 = sql_createTable + sql_insertValues1 + sql_insertValues2 + sql_insert
 var randomWords = "가나다라마바사아자차카타파하";
 var randomOptions = [0, 100, 10, 1, 101, 110, 111, 11]
 
-var randomSz = 500;
+var randomSz = 1500;
 for (var i = 5; i < randomSz; ++i) {
     var poolNameRandom = "";
     for (var charCnt = 0; charCnt < 3; ++charCnt)poolNameRandom += randomWords[parseInt(Math.random() * 14)];
@@ -199,7 +199,8 @@ router.route('/pools/search').get((req, res) => {
                     }
                     var ret = [];
                     ret.push(rows[0].cnt);
-                    conn.query(sql_select, [searchWord, searchWord, poolTypeMask, poolOpentime, poolOpentime, poolOption, (pageNumber - 1) * itemsPerPage, (pageNumber - 1) * itemsPerPage + itemsPerPage], (error, rows, fields) => {
+                    // conn.query(sql_select, [searchWord, searchWord, poolTypeMask, poolOpentime, poolOpentime, poolOption, (pageNumber - 1) * itemsPerPage, (pageNumber - 1) * itemsPerPage + itemsPerPage], (error, rows, fields) => {
+                    conn.query(sql_select, [searchWord, searchWord, poolTypeMask, poolOpentime, poolOpentime, poolOption, (pageNumber - 1) * itemsPerPage, itemsPerPage], (error, rows, fields) => {
                         conn.release();
                         if (error) {
                             reject(error);
