@@ -328,7 +328,7 @@
         totalPages: 1,
         startPage: 1,
         visiblePages: 5,
-        initiateStartPageClick: true,
+        initiateStartPageClick: false,
         hideOnlyOnePage: false,
         href: false,
         pageVariable: '{{page}}',

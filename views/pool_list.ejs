@@ -260,7 +260,7 @@
                         first: '«', 
                         last: '»', 
                         onPageClick: function (event, page) {
-                            alert("<%=result.totalCount%>");
+                            alert(page);
                              if (page!= parseInt("<%=result.filters.pageNumber%>")){
                                 location.href = ("/pools/search?searchWord=<%=result.filters.searchWord %>"
                                     + "&poolPublic=<%=result.filters.poolPublic %>" + "&poolPrivate=<%=result.filters.poolPrivate %>"
