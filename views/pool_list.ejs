@@ -67,7 +67,7 @@
                             <div class="form-row mb-4">
                                 <!-- 검색할 텍스트 -->
                                 <div class="input-group">
-                                    <input name="searchWord" type="text" class="form-control" placeholder="Search for...">
+                                    <input name="searchWord" type="text" class="form-control" placeholder="Search for..." value="<%=result.filters.searchWord %>">
                                     <span class="input-group-append">
                                       <button class="btn btn-secondary" type="submit">Go!</button>
                                     </span>
@@ -91,23 +91,23 @@
                                             <div class="form-row">
                                                 <p class="text-dark mr-1">운영방식: </p>
                                                 <div class="form-check">
-                                                    <input type="hidden" name="poolPublic" value="0"><input
-                                                        class="form-check-input" checked type="checkbox"
-                                                        onclick="valueReverser(this)">
+                                                    <input type="hidden" name="poolPublic" value="0">
+                                                    <input class="form-check-input" <% if(result.filters.poolPublic==1){ %>checked<%}%> 
+                                                         type="checkbox" onclick="valueReverser(this)">
                                                     <label class="form-check-label text-dark mr-1" for="poolPublic">공공
                                                     </label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input type="hidden" name="poolPrivate" value="0"><input
-                                                        class="form-check-input" checked type="checkbox"
-                                                        onclick="valueReverser(this)">
+                                                    <input type="hidden" name="poolPrivate" value="0">
+                                                    <input class="form-check-input" <% if(result.filters.poolPrivate==1){ %>checked<%}%> 
+                                                        type="checkbox" onclick="valueReverser(this)">
                                                     <label class="form-check-label text-dark mr-1" for="poolPrivate">사설
                                                     </label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input type="hidden" name="poolHotel" value="0"><input
-                                                        class="form-check-input" type="checkbox"
-                                                        onclick="valueReverser(this)">
+                                                    <input type="hidden" name="poolHotel" value="0">
+                                                    <input class="form-check-input" <% if(result.filters.poolHotel ==1){ %>checked<%}%> asdasd
+                                                        type="checkbox"onclick="valueReverser(this)">
                                                     <label class="form-check-label text-dark mr-1" for="poolHotel">호텔
                                                     </label>
                                                 </div>
@@ -116,15 +116,15 @@
                                             <div class="form-row">
                                                 <p class="text-dark mr-1">수영장 유형: </p>
                                                 <div class="form-check">
-                                                    <input type="hidden" name="poolIndoor" value="0"><input
-                                                        class="form-check-input" checked type="checkbox"
-                                                        onclick="valueReverser(this)">
+                                                    <input type="hidden" name="poolIndoor" value="0">
+                                                    <input class="form-check-input" <% if(result.filters.poolIndoor ==1){ %>checked<%}%>
+                                                         type="checkbox" onclick="valueReverser(this)">
                                                     <label class="form-check-label text-dark mr-1" for="poolIndoor">실내 |
                                                     </label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input type="hidden" name="poolOutdoor" value="0"><input
-                                                        class="form-check-input" type="checkbox"
+                                                    <input type="hidden" name="poolOutdoor" value="0">
+                                                    <input class="form-check-input" type="checkbox" <% if(result.filters.poolOutdoor ==1){ %>checked<%}%>
                                                         onclick="valueReverser(this)">
                                                     <label class="form-check-label text-dark mr-1" for="poolOutdoor">야외
                                                     </label>
@@ -134,8 +134,8 @@
                                             <div class="form-row">
                                                 <p class="text-dark mr-1">자유수영이 있는 수영장만 검색: </p>
                                                 <div class="form-check">
-                                                    <input type="hidden" name="poolOpentime" value="0"><input
-                                                        class="form-check-input" type="checkbox"
+                                                    <input type="hidden" name="poolOpentime" value="0">
+                                                    <input class="form-check-input" type="checkbox" <% if(result.filters.poolOpentime ==1){ %>checked<%}%>
                                                         onclick="valueReverser(this)">
                                                     <label class="form-check-label text-dark mr-1"
                                                         for="poolOpentime">확인</label>
@@ -145,24 +145,24 @@
                                             <div class="form-row">
                                                 <p class="text-dark mr-1">전용 수영장 검색: </p>
                                                 <div class="form-check">
-                                                    <input type="hidden" name="poolForChild" value="0"><input
-                                                        class="form-check-input" checked type="checkbox"
-                                                        onclick="valueReverser(this)">
+                                                    <input type="hidden" name="poolForChild" value="0">
+                                                    <input class="form-check-input" checked <% if(result.filters.poolForChild ==1){ %>checked<%}%>
+                                                        type="checkbox" onclick="valueReverser(this)">
                                                     <label class="form-check-label text-dark mr-1"
                                                         for="poolForChild">유아전용 |
                                                     </label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input type="hidden" name="poolForWoman" value="0"><input
-                                                        class="form-check-input" type="checkbox"
+                                                    <input type="hidden" name="poolForWoman" value="0">
+                                                    <input class="form-check-input" type="checkbox" <% if(result.filters.poolForWoman ==1){ %>checked<%}%>
                                                         onclick="valueReverser(this)">
                                                     <label class="form-check-label text-dark mr-1"
                                                         for="poolForWoman">여성전용 ㅣ
                                                     </label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input type="hidden" name="poolForDisabled" value="0"><input
-                                                        class="form-check-input" type="checkbox"
+                                                    <input type="hidden" name="poolForDisabled" value="0">
+                                                    <input class="form-check-input" type="checkbox" <% if(result.filters.poolForDisabled ==1){ %>checked<%}%>
                                                         onclick="valueReverser(this)">
                                                     <label class="form-check-label text-dark mr-1"
                                                         for="poolForDisabled">장애인전용 ㅣ </label>
