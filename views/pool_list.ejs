@@ -49,7 +49,8 @@
     <!--List presenting-->
     <div class="container">
         <!-- Page Heading -->
-        <h1 class="my-4">수영장 검색결과
+        <h1 class="my-4">
+            수영장 검색결과
             <small>(검색어:<%=result.filters.searchWord%>)</small>
         </h1>
         <%function dec2bin(dec){return (dec >>> 0).toString(2);} %>
@@ -200,11 +201,18 @@
                         <div class="row mb-1">
                             <!-- For checking poolOptions -->
                             <h3><%=poolInfo.poolName%>
-                                <%var Options=poolInfo.poolOption.toString();%>
-                                <%if(Options[0]==1){%><i class="fas fa-child text-warning"></i><%}%>
-                   <%if(Options[1]==1){%><i class="fas fa-female text-danger"></i><%}%>
-                   <%if(Options[2]==1){%><i class="fab fa-accessible-icon text-success"></i><%}%>
-                    </h3>
+                                <%var options=poolInfo.poolOption.toString();%>
+                                <!-- For sync the -->
+                                <%
+                                    while(options.length!=3){
+                                        options='0'+options;
+                                    }
+                                %>
+                                
+                                <%if(options[0]==1){%><i class="fas fa-child text-warning"></i><%}%>
+                                <%if(options[1]==1){%><i class="fas fa-female text-danger"></i><%}%>
+                                <%if(options[2]==1){%><i class="fab fa-accessible-icon text-success"></i><%}%>
+                            </h3>
                 </div>
                 <!-- For checking poolType : public / private / hotel / indoor / outdoor  -->
                 <div class="row mb-3">
