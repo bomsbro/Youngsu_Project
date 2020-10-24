@@ -180,7 +180,6 @@ router.route('/pools/search').get((req, res) => {
     var poolOption = req.query.poolForChild + req.query.poolForWoman + req.query.poolForDisabled;
 
     // console.log(poolTypeMask, poolOpentime, poolOption)
-    // ...
 
     var sql_select_totalCount = "select count(*) as cnt from pooltable where (poolName like ? or poolAddress like ?) and (poolTypeMask&?)=poolTypeMask and (poolOpentime&?)=? and poolOption=?;"
     var sql_select = "select * from pooltable where (poolName like ? or poolAddress like ?) and (poolTypeMask&?)=poolTypeMask and (poolOpentime&?)=? and poolOption=? order by poolId limit ?,?;"
