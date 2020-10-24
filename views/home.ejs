@@ -40,7 +40,10 @@
     <nav class="navbar navbar-light bg-light static-top">
         <div class="container">
             <a class="navbar-brand" href="/"><img src="../assets/img/logo-youngsu.png"></a>
-            <a class="btn btn-primary" href="#">Sign In</a>
+            <div>
+                <a class="btn btn-secondary" href="#">회원가입</a>
+                <a class="btn btn-secondary" href="#">로그인</a>
+            </div>
         </div>
     </nav>
 
@@ -59,7 +62,7 @@
                             <!-- 검색할 텍스트 -->
                             <div class="col-12 col-md-9 mb-2 mb-md-0">
                                 <input name='searchWord' type="text" class="form-control form-control-lg"
-                                    placeholder="수영장 이름 또는 위치(ex.성동구) 입력">
+                                    placeholder="수영장 이름 또는 위치(ex.성동구) 입력" required>
                             </div>
                             <!-- 제출 버튼 -->
                             <div class="col-12 col-md-3">
@@ -109,8 +112,8 @@
                                         <div class="form-row">
                                             <p class="text-dark mr-1">수영장 유형: </p>
                                             <div class="form-check">
-                                                <input type="hidden" name="poolIndoor" value="0"><input
-                                                    class="form-check-input" checked type="checkbox"
+                                                <input type="hidden" name="poolIndoor" value="0">
+                                                <input class="form-check-input" checked type="checkbox"
                                                     onclick="valueReverser(this)">
                                                 <label class="form-check-label text-dark mr-1" for="poolIndoor">실내 |
                                                 </label>
@@ -125,7 +128,7 @@
                                         </div>
                                         <!-- 자유수영 -->
                                         <div class="form-row">
-                                            <p class="text-dark mr-1">자유수영이 있는 수영장만 검색: </p>
+                                            <p class="text-dark mr-1">자유수영만 검색: </p>
                                             <div class="form-check">
                                                 <input type="hidden" name="poolOpentime" value="0"><input
                                                     class="form-check-input" type="checkbox"
