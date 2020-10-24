@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="../assets/css/register-page.css" rel="stylesheet">
+    <!-- CDN for fontAwesome -->
+    <script src="https://kit.fontawesome.com/a371979621.js" crossorigin="anonymous"></script>
+    <!-- jQuery pluginfor pagination -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        //모든 공백 체크 정규식
+        var empJ = /\s/g;
+        //특수 문자가 가능하며 중앙에 @ 필수, 그리고 . 뒤에 2~3글자를 써야됨.
+        var mailJ = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+        //4~12자리의 영문 대소문자와 숫자로 이루어진 것만 쓸 수 있다.
+        var pwJ = /^[A-Za-z0-9]{4,12}$/;
+
+        $(function () {
+            $('#inputPassword').blur(function (){
+                if (pwJ.test($('#inputPassword').val())) {
+                    $('#passwordCheck').text(' ');
+                } else {
+                    $('#passwordCheck').text('숫자 or 문자로만 4~12자리 입력');
+                    $('#passwordCheck').addClass('text-warning');
+                }
+            });
+
+            $('#inputConfirmPassword').blur(function () {
+                if ($('#inputPassword').val() != $(this).val()) {
+                    $('#confirmPasswordCheck').text('비밀번호가 일치하지 않습니다.');
+                    $('#confirmPasswordCheck').addClass('text-warning');
+                } else {
+                    console.log('true');
+                    $('#confirmPasswordCheck').text(' ');
+                }
+            });
+
+        });
+    </script>
+</head>
+
+<body>
+    <!-- This snippet uses Font Awesome 5 Free as a dependency. You can download it at fontawesome.io! -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-xl-9 mx-auto">
+                <div class="card card-signin flex-row my-5">
+
+                    <div class="card-img-left d-none d-md-flex">
+                        <!-- Background image for card set in CSS! -->
+                    </div>
+
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Register</h5>
+
+                        <!-- Start Form -->
+                        <form class="form-signin" action='/pools/search'>
+
+                            <div class="form-label-group">
+                                <input type="email" id="inputEmail" class="form-control" placeholder="Email address"
+                                    required>
+                                <label for="inputEmail">Email address</label>
+                            </div>
+
+                            <!--  이 부분은 나중에 추가할거임
+                <div class="form-label-group">
+                  <input type="text" id="inputUserame" class="form-control" placeholder="Username" required autofocus>
+                  <label for="inputUserame">Username</label>
+                </div>
+                 -->
+
+                            <hr>
+
+                            <div class="form-label-group">
+                                <input type="password" id="inputPassword" class="form-control" placeholder="Password"
+                                    required>
+                                <label for="inputPassword">비밀번호</label>
+                                <div class="check_font" id="passwordCheck"></div>
+                            </div>
+
+                            <div class="form-label-group">
+                                <input type="password" id="inputConfirmPassword" class="form-control"
+                                    placeholder="Confirm Password" required>
+                                <label for="inputConfirmPassword">비밀번호 확인</label>
+                                <div class="check_font" id="confirmPasswordCheck"></div>
+                            </div>
+
+                            <button class="btn btn-lg btn-primary btn-block text-uppercase"
+                                type="submit">Register</button>
+                            <a class="d-block text-center mt-2 small" href="#">Sign In</a>
+                            <hr class="my-4">
+                            <button class="btn btn-lg btn-google btn-block text-uppercase" type="submit"><i
+                                    class="fab fa-google mr-2"></i> Sign up with Google</button>
+                            <button class="btn btn-lg btn-facebook btn-block text-uppercase" type="submit"><i
+                                    class="fab fa-facebook-f mr-2"></i> Sign up with Facebook</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery plugin -->
+    <script src="http://code.jquery.com/jquery-latest.min.js "></script>
+</body>
+
+</html>
