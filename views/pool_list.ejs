@@ -12,7 +12,6 @@
 
     <!-- Bootstrap core CSS -->
     <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- Custom fonts for this template -->
     <link href="../assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
     <link href="../assets/vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css">
@@ -25,40 +24,6 @@
     <script type="text/javascript" src="../assets/js/jquery.twbsPagination.js"></script>
     <!-- CDN for fontAwesome -->
     <script src="https://kit.fontawesome.com/a371979621.js" crossorigin="anonymous"></script>
-    <!-- For pagination-->
-    <script>
-             var visiblePages = 10;
-             var visibleList = 4;
-            var totalCount = parseInt("<%=result.totalCount%>");
-            var totalPages = totalCount / visibleList;
-            if (totalCount % visibleList > 0) totalPages++;
-            if (totalPages < visiblePages) visiblePages = totalPages;         
-            var pageNow = parseInt("<%=result.filters.pageNumber%>"); 
-
-          $(function () {
-            $('#pagenation').twbsPagination({
-                        startPage:this.pageNow, 
-                        totalPages: this.totalPages, 
-                        visiblePages: this.visiblePages,
-                        prev: "이전", 
-                        next: "다음", 
-                        first: '«', 
-                        last: '»', 
-                        onPageClick: function (event, page) {
-                            alert(page);
-                             if (page!= parseInt("<%=result.filters.pageNumber%>")){
-                                location.href = ("/pools/search?searchWord=<%=result.filters.searchWord %>"
-                                    + "&poolPublic=<%=result.filters.poolPublic %>" + "&poolPrivate=<%=result.filters.poolPrivate %>"
-                                    + "&poolHotel=<%=result.filters.poolHotel %>" + "&poolIndoor=<%=result.filters.poolIndoor %>"
-                                    + "&poolOutdoor=<%=result.filters.poolOutdoor %>" + "&poolOpentime=<%=result.filters.poolOpentime %>"
-                                    + "&poolForChild=<%=result.filters.poolForChild %>" + "&poolForWoman=<%=result.filters.poolForWoman %>"
-                                    + "&poolForDisabled=<%=result.filters.poolForDisabled %>" + "&pageNumber=" + String(page));
-                            }
-                        } 
-                    });
-
-          });
-    </script>
     <script>
         window.onload = function () {
             var checkboxes = document.getElementsByClassName('form-check-input');
@@ -282,7 +247,39 @@
 
                 <!-- For pagination -->
                 <ul id="pagenation" class="pagination justify-content-center"></ul>
+                <script>
+                    var visiblePages = 10;
+                    var visibleList = 4;
 
+                    var totalCount = parseInt("<%=result.totalCount%>");
+
+                    var totalPages = totalCount / visibleList;
+                    if (totalCount % visibleList > 0) totalPages++;
+                    if (totalPages < visiblePages) visiblePages = totalPages; 
+                    
+                    var pageNow = parseInt("<%=result.filters.pageNumber%>"); 
+                        
+                    $('#pagenation').twbsPagination({
+                        startPage:this.pageNow, 
+                        totalPages: this.totalPages, 
+                        visiblePages: this.visiblePages,
+                        prev: "이전", 
+                        next: "다음", 
+                        first: '«', 
+                        last: '»', 
+                        onPageClick: function (event, page) {
+                            alert(page);
+                             if (page!= parseInt("<%=result.filters.pageNumber%>")){
+                                location.href = ("/pools/search?searchWord=<%=result.filters.searchWord %>"
+                                    + "&poolPublic=<%=result.filters.poolPublic %>" + "&poolPrivate=<%=result.filters.poolPrivate %>"
+                                    + "&poolHotel=<%=result.filters.poolHotel %>" + "&poolIndoor=<%=result.filters.poolIndoor %>"
+                                    + "&poolOutdoor=<%=result.filters.poolOutdoor %>" + "&poolOpentime=<%=result.filters.poolOpentime %>"
+                                    + "&poolForChild=<%=result.filters.poolForChild %>" + "&poolForWoman=<%=result.filters.poolForWoman %>"
+                                    + "&poolForDisabled=<%=result.filters.poolForDisabled %>" + "&pageNumber=" + String(page));
+                            }
+                        } 
+                    });
+                </script>
             </div>
          </div>
     </div>
@@ -359,7 +356,8 @@
     </footer>
 
     <!-- Bootstrap core JavaScript -->
-
+    <script src="../assets/vendor/jquery/jquery.min.js"></script>
+    <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 </body>
 
