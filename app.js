@@ -1,11 +1,18 @@
 const http = require('http');
 const express = require('express');
-const router = express.Router();
+const session = require('express-session');
+const passport = require('passport');
+const passportConfig = require('./passportLocal');
 const cors = require('cors');
+const router = express.Router();
 const static = require('serve-static');
 const app = express();
 // const url = require('url');
 const mysql = require('mysql');
+app.use(session({ secret: 'secret secretary', resave: true, saveUninitialized: false }))
+app.use(passport.initialize());
+app.use(passport.session());
+passportConfig();
 
 
 // please enter your mysql local username and its password below
@@ -235,6 +242,15 @@ router.route('/pools/search').get((req, res) => {
         })
     }
     resultSender();
+})
+
+router.route('/login').get((req, res) => {
+    res.sendFile(__dirname + '/views/login.html');
+})
+router.post('/login/check', passport.authenticate('local', {
+    failureRedirect: '/login'
+}), (req, res) => {
+    res.redirect('/');
 })
 
 router.route('/pools/input').get((req, res) => {

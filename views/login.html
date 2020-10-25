@@ -17,7 +17,7 @@
         var pwJ = /^[A-Za-z0-9]{4,12}$/;
 
         $(function () {
-            $('#inputPassword').blur(function (){
+            $('#inputPassword').blur(function () {
                 if (pwJ.test($('#inputPassword').val())) {
                     $('#passwordCheck').text(' ');
                 } else {
@@ -40,19 +40,19 @@
                 <div class="card card-signin my-5">
                     <div class="card-body">
                         <h5 class="card-title text-center">로그인 해주세요.</h5>
-                        <form class="form-signin">
+                        <form action='/login/check' method='post' class="form-signin">
                             <div class="form-label-group">
-                                <input type="email" id="inputEmail" class="form-control" placeholder="Email address"
-                                    required autofocus>
+                                <input type="email" name="useremail" id="inputEmail" class="form-control"
+                                    placeholder="Email address" required autofocus>
                                 <label for="inputEmail">이메일 주소</label>
-                                
+
                             </div>
 
                             <div class="form-label-group">
-                                <input type="password" id="inputPassword" class="form-control" placeholder="Password"
-                                required>
-                            <label for="inputPassword">비밀번호</label>
-                            <div class="check_font" id="passwordCheck"></div>
+                                <input type="password" name="password" id="inputPassword" class="form-control"
+                                    placeholder="Password" required>
+                                <label for="inputPassword">비밀번호</label>
+                                <div class="check_font" id="passwordCheck"></div>
                             </div>
 
                             <div class="custom-control custom-checkbox mb-3">
