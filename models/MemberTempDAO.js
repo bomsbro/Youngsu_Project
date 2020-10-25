@@ -19,7 +19,7 @@ var members = {
 module.exports = class MemberTempDAO {
     constructor() { }
     findById = (id, cb) => {
-        if (members[id] != null) cb(null, true);
+        if (members[id] != null) cb(null, members[id]);
         else cb("this ID does not exist", false);
     }
     matchPw = (id, pw, cb) => {

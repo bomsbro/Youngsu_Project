@@ -4,14 +4,14 @@ const MemberTempDAO = require('./models/MemberTempDAO');
 const memberTempDAO = new MemberTempDAO();
 
 module.exports = () => {
-    passport.serializeUser((user, done) => {
-        done(null, user._id);
+    passport.serializeUser((member, done) => {
+        done(null, member.id);
     })
     passport.deserializeUser((id, done) => {
-        // memberTempDAO.findById2(id, (err, user) => {
-        //     done(null, user);
-        // })
-        done(null, user);
+        memberTempDAO.findById(id, (err, member) => {
+            done(err, member);
+        })
+        // done(null, id);
     })
     passport.use(new LocalStrategy({
         usernameField: 'useremail',
@@ -19,11 +19,13 @@ module.exports = () => {
         session: true,
         passReqToCallback: true,
     }, (req, id, pw, done) => {
-        memberTempDAO.findById(id, (err, doesExist) => {
+        memberTempDAO.findById(id, (err, member) => {
             if (err) return done(err);
-            if (!doesExist) return done(null, false, { message: err });
-            return memberTempDAO.matchPw(id, pw, (err, result) => {
-                if (result) return done(null, result);
+            if (!member) {
+                return done(null, false, { message: err });
+            }
+            return memberTempDAO.matchPw(id, pw, (err, member) => {
+                if (member) return done(null, member);
                 return done(null, false, { message: err });
             })
         })
