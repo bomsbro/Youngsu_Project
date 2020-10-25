@@ -152,7 +152,17 @@ function maskMaker(number) {
     return ret;
 }
 
-router.route('/pools/search').get((req, res) => {
+router.post('/login/check', passport.authenticate('local', {
+    failureRedirect: '/login',
+}), (req, res) => {
+    // console.log('authentication complete - success!')
+    req.session.save(function () {
+        res.redirect('/');
+    })
+})
+
+router.route('/pools/search/').get((req, res) => {
+    if (!req.query.searchWord) res.redirect('/');
     // var filters = {
     //     searchWord: req.query.searchWord,
     //     'poolPublic': req.query.poolPublic,
@@ -253,11 +263,12 @@ router.route('/pools/search').get((req, res) => {
 router.route('/login').get((req, res) => {
     res.sendFile(__dirname + '/views/login.html');
 })
-router.post('/login/check', passport.authenticate('local', {
-    failureRedirect: '/login',
-}), (req, res) => {
-    console.log('authentication complete - success!')
-    res.redirect('/');
+
+router.route('/logout').get((req, res) => {
+    req.logout();
+    req.session.save(function () {
+        res.redirect('/');
+    })
 })
 
 router.route('/pools/input').get((req, res) => {

@@ -22,8 +22,8 @@ module.exports = class MemberTempDAO {
         if (members[id] != null) cb(null, members[id]);
         else cb("this ID does not exist", false);
     }
-    matchPw = (id, pw, cb) => {
-        if (members[id].pw == pw) cb(null, members[id])
-        else cb("this PW is incorrect", false);
-    }
+    // matchPw = (id, pw, cb) => {
+    //     if (members[id].pw == pw) cb(null, members[id])
+    //     else cb("this PW is incorrect", false);
+    // }
 }
