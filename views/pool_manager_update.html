@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- CSS for this temp-->
+    <link href="../assets/css/pool_manager_update.css" rel="stylesheet">
+
+    <!-- Bootstrap core CSS -->
+    <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="../assets/vendor/bootstrap/css/jquery.slim.min.css" rel="stylesheet">
+    <link href="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js" rel="stylesheet">
+    <link href="../assets/vendor/fontawesome-free/css/all.css" rel="stylesheet">
+</head>
+<!-- This snippet uses Font Awesome 5 Free as a dependency. You can download it at fontawesome.io! -->
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-xl-9 mx-auto">
+                <div class="card card-signin flex-row my-5">
+                    <div class="card-img-left d-none d-md-flex">
+                        <!-- Background image for card set in CSS! -->
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title text-center">수영장 정보 수정</h5>
+                        <form class="form-signin">
+
+                            <div class="form-label-group">
+                                <input type="text" id="inputUserame" class="form-control" placeholder="Username"
+                                    required autofocus>
+                                <label for="inputUserame">수영장 이름</label>
+                            </div>
+
+                            <div class="form-label-group">
+                                <input type="email" id="inputEmail" class="form-control" placeholder="Email address"
+                                    required>
+                                <label for="inputEmail">수영장 주소</label>
+                            </div>
+
+                            <div class="form-label-group">
+                                <input type="password" id="inputPassword" class="form-control" placeholder="Password"
+                                    required>
+                                <label for="inputPassword">수영장 전화번호</label>
+                            </div>
+
+                            <hr>
+                            <!-- poolType -->
+                            <div class="input-group mb-3"> 
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text" for="inputGroupSelect01">운영주체</label>
+                                </div>
+                                <select class="custom-select" id="inputGroupSelect01">
+                                    <option value="1"   selected>공공 수영장</option>
+                                    <option value="2">사설 수영장</option>
+                                    <option value="3">호텔 수영장</option>
+                                </select>
+                            </div>
+
+                            
+                            <!-- 실내외 -->
+                            <div class="form-row">
+                                <p class="text-dark mr-1">수영장 유형: </p>
+                                <div class="form-check">
+                                    <input type="hidden" name="poolIndoor" value="0">
+                                    <input class="form-check-input" checked type="checkbox">
+                                    <label class="form-check-label text-dark mr-1" for="poolIndoor">실내 |
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="poolOutdoor" value="0">
+                                    <label class="form-check-label text-dark mr-1" for="poolOutdoor">야외
+                                    </label>
+                                </div>
+                                <p class="text-dark mr-1">(복수 체크 가능) </p>
+                            </div>
+
+                            <hr>
+                            <div class="form-check">
+                                <input class="form-check-input"  type="checkbox" name="poolOpentime" value="0">
+                                <label class="form-check-label text-dark mr-1" for="poolOpentime">자유 수영 프로그램이 있습니다.</label>
+                            </div>
+
+                            <hr>
+
+                            <!-- poolOption -->
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text" for="inputGroupSelect01">전용 수영장</label>
+                                </div>
+                                <select class="custom-select" id="inputGroupSelect01">
+                                    <option selected>전용이 아님</option>
+                                    <option value="1">유아 전용</option>
+                                    <option value="2">여성 전용</option>
+                                    <option value="3">장애인 전용</option>
+                                </select>
+                            </div>
+
+
+
+
+                            <button class="btn btn-lg btn-primary btn-block text-uppercase"
+                                type="submit">Register</button>
+                            <hr class="my-4">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+
+<!-- Bootstrap core CSS -->
+<link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
